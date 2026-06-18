@@ -71,7 +71,7 @@ const server = http.createServer((req, res) => {
   const url = new URL(req.url || "/", `http://${req.headers.host}`);
   const pathname = url.pathname;
   const safePath = path.normalize(pathname).replace(/^(\.\.(\/|\\|$))+/, "");
-  const fullPath = path.join(STATIC_ROOT, safePath);
+const fullPath = path.join(STATIC_ROOT, safePath === "/" ? "index.html" : safePath);
 
   // Must stay within STATIC_ROOT
   if (!fullPath.startsWith(STATIC_ROOT)) {
